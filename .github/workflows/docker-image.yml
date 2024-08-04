@@ -22,7 +22,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: tsutomu/${{ github.event.repository.name }}
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
