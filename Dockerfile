@@ -1,5 +1,5 @@
 FROM ubuntu:24.04
-LABEL maintainer="Tsutomu Nakamura<tsuna.0x00@gmail.com>
+LABEL maintainer="Tsutomu Nakamura<tsuna.0x00@gmail.com>"
 RUN \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates curl vim unzip && \
