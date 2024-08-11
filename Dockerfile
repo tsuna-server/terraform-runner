@@ -2,7 +2,7 @@ FROM ubuntu:24.04
 LABEL maintainer="Tsutomu Nakamura<tsuna.0x00@gmail.com>"
 RUN \
     apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates curl vim unzip gnupg software-properties-common wget && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates curl vim unzip gnupg software-properties-common wget jq && \
     install -m 0755 -d /etc/apt/keyrings && \
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc && \
     chmod a+r /etc/apt/keyrings/docker.asc && \
