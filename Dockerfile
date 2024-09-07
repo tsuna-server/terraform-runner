@@ -1,6 +1,11 @@
 FROM ubuntu:24.04
 LABEL maintainer="Tsutomu Nakamura<tsuna.0x00@gmail.com>"
+
+COPY motd.sh /root/.motd.sh
 RUN \
+    # Set up motd \
+    chmod 755 /root/.motd.sh && \
+    echo "\${HOME}/.motd.sh" >> /root/.bashrc && \
     # Install fundemental packages \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates curl vim unzip gnupg software-properties-common wget jq apt-transport-https && \
