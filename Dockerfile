@@ -3,7 +3,7 @@ LABEL maintainer="Tsutomu Nakamura<tsuna.0x00@gmail.com>"
 RUN \
     # Install fundemental packages \
     apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates curl vim unzip gnupg software-properties-common wget jq && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates curl vim unzip gnupg software-properties-common wget jq apt-transport-https && \
     # Prepare repositories \
     install -m 0755 -d /etc/apt/keyrings && \
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc && \
@@ -28,6 +28,14 @@ RUN \
     curl -LO https://github.com/getsops/sops/releases/download/v3.9.0/sops-v3.9.0.linux.amd64 && \
     mv sops-v3.9.0.linux.amd64 /usr/local/bin/sops && \
     chmod +x /usr/local/bin/sops && \
+    # Install kubectl \
+    # https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-using-native-package-management \
+    curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.31/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg && \
+    chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg && \
+    echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.31/deb/ /' | tee /etc/apt/sources.list.d/kubernetes.list && \
+    chmod 644 /etc/apt/sources.list.d/kubernetes.list && \
+    apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y kubectl && \
     # Clean up \
     apt-get clean autoclean && \
     apt-get autoremove --yes && \
