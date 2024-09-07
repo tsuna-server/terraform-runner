@@ -12,6 +12,7 @@ aws configure --profile developer
 > AWS Secret Access Key [None]: \${AWS_SECRET_ACCESS_KEY}
 > Default region name [None]: ap-northeast-1
 > Default output format [None]: json
+export AWS_PROFILE=developer
 
 # Configuring and applying Terraform
 terraform init
