@@ -20,6 +20,9 @@ terraform fmt
 terraform validate
 export AWS_PROFILE=developer
 terraform apply
+
+# Update kubeconfig for EKS
+aws eks update-kubeconfig --name \${CLUSTER_NAME}
 ########################################################################
 EOF
 }
