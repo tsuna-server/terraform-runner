@@ -2,6 +2,7 @@ FROM ubuntu:24.04
 LABEL maintainer="Tsutomu Nakamura<tsuna.0x00@gmail.com>"
 
 COPY motd.sh /root/.motd.sh
+SHELL ["/bin/bash", "-c"]
 RUN \
     # Set up motd \
     chmod 755 /root/.motd.sh && \
@@ -41,6 +42,8 @@ RUN \
     chmod 644 /etc/apt/sources.list.d/kubernetes.list && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y kubectl && \
+    # Install helm \
+    bash <(curl -o- https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3) && \
     # Clean up \
     apt-get clean autoclean && \
     apt-get autoremove --yes && \
